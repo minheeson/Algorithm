@@ -11,7 +11,7 @@
 
   - 이항 계수 : n개의 서로 다른 원소 중에서 r개의 원소를 순서없이 골라내는 방법의 수 
 
-    <img src="https://github.com/minheeson/Algorithm/blob/master/Algorithmic%20Problem%20Solving%20Strategies/screenshots/8_%EC%9D%B4%ED%95%AD%EA%B3%84%EC%88%98.png" width=400/>
+    <img src="https://github.com/minheeson/Algorithm/blob/master/Algorithmic%20Problem%20Solving%20Strategies/screenshots/8_%EC%9D%B4%ED%95%AD%EA%B3%84%EC%88%98.png" width=300/>
 
   - 재귀 호출을 이용한 이항 계수의 계산
 

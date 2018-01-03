@@ -13,31 +13,24 @@ public class Baek_1463 {
 		Scanner sc = new Scanner(System.in);
 		int n = sc.nextInt();
 		dp = new int[n + 1];
-
+		dp[1] = 0;
 		Arrays.fill(dp, 0);
 
 		System.out.println(oper(n));
 	}
 
-	private static int oper(int input) {
-		if (input == 1)
-			return 0;
-		if (dp[input] > 0)
-			return dp[input];
-
-		dp[input] = oper(input - 1) + 1;
-		if (input % 3 == 0) {
-			int temp = oper(input / 3) + 1;
-			if (dp[input] > temp)
-				dp[input] = temp;
-		}
-		if (input % 2 == 0) {
-			int temp = oper(input / 2) + 1;
-			if (dp[input] > temp)
-				dp[input] = temp;
+	static int oper(int input) {
+		for (int i = 2; i <= input; i++) {
+			dp[i] = dp[i - 1] + 1;
+			if (i % 3 == 0) {
+				dp[i] = Math.min(dp[i], dp[i / 3] + 1);
+			}
+			if (i % 2 == 0) {
+				dp[i] = Math.min(dp[i], dp[i / 2] + 1);
+			}
 		}
 
 		return dp[input];
-
 	}
+
 }
