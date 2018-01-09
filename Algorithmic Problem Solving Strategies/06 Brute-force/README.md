@@ -17,9 +17,9 @@
 
   ```java
   static int recursiveSum(int n) {
-  		if (n == 1)
-  			return 1; // 더이상 쪼개지지 않을 때     
-  		return n + recursiveSum(n - 1);
+  	if (n == 1)
+  		return 1; // 더이상 쪼개지지 않을 때     
+  	return n + recursiveSum(n - 1);
   }
   ```
 
@@ -32,10 +32,10 @@
 
   ```java
   /**
-  	 * @param n : 전체 원소의 수
-  	 * @param picked : 지금까지 고른 원소들의 번호
-  	 * @param toPick : 더 고를 원소의 수
-  	 */
+  * @param n : 전체 원소의 수
+  * @param picked : 지금까지 고른 원소들의 번호
+  * @param toPick : 더 고를 원소의 수
+  */
   static void pick(int n, ArrayList<Integer> picked, int toPick) {
   	// 기저 사례 : 더 고를 원소가 없을 때 고른 원소들을 출력   
   	if (toPick == 0) {
