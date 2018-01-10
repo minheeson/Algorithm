@@ -65,3 +65,60 @@
 - 그 중 하나의 조각을 선택해 답의 일부를 만들고, 나머지 답을 재귀 호출을 통해 완성
 - 조각이 하나밖에 남지 않은 경우, 혹은 하나도 남지 않은 경우에는 답을 생성했으므로, 이것을 기저 사례로 선택해 처리 
 
+
+
+
+### 최적화 문제 
+
+- 최적화 문제 : 문제의 답이 하나가 아니라 여러 개이고, 그 중에서 어떤 기준에 따라 가장 '좋은' 답을 찾아 내는 문제
+
+- 완전 탐색은 최적화 문제를 풀기 위한 **가장 직관적인 방법** 
+
+- 예제 : **여행하는 외판원 문제** (Traveling Sales-man Problem, TSP)
+
+  > 어떤 나라에 n (2<=n<=10)개의 큰 도시가 있다고 합시다. 한 영업 사원이 한 도시에서 출발해 다른 도시들을 전부 한 번씩 방문한 뒤 시작 도시로 돌아오려고 합니다. 문제를 간단히 하기 위해, 각 도시들은 모두 직선 도로로 연결되어 있다고 합시다. 이때 영업 사원이 여행해야 할 거리는 어느 순서로 각 도시들을 방문하느냐에 따라 달라집니다.
+  >
+  > 이때 가능한 모든 경로 중 가장 짧은 경로를 어떻게 찾아낼 수 있을까요? 
+
+  - **재귀 호출을 통한 답안 생성**
+
+    - *n* 개의 도시로 구성된 경로를 *n* 개의 조각으로 나눠, 앞에서부터 도시를 하나씩 추가해 경로를 만들면 됨 
+    - *shortestPath(path) = path* 가 지금까지 만든 경로일 때, 나머지 도시들을 모두 방문하는 경로들 중 가장 짧은 것의 길이를 반환한다. 
+
+  - **구현**
+
+    ```java
+    /**
+     * 
+     * @param path : 지금까지 만든 경로   
+     * @param visited : 각 도시의 방문 여부  
+     * @param currentLength : 지금까지 만든 경로의 길이      
+     * @return : 나머지 도시들을 모두 방문하는 경로들 중 가장 짧은 것의 길이를 반환한다.   
+     */
+    static double shortestPath(ArrayList<Integer> path, boolean[] visited, double currentLength) {
+    	// 기저 사례 : 모든 도시를 다 방문했을 때는 시작 도시로 돌아가고 종료한다.
+    	if (path.size() == n) {
+    		return currentLength + dist[path.get(0)][path.get(path.size() - 1)];
+    	}
+
+    	double ret = Double.MAX_VALUE; // 매우 큰 값으로 초기화
+    	// 다음 방문할 도시를 전부 시도해 본다.
+    	for (int next = 0; next < n; next++) {
+    		if (visited[next])
+    			continue;
+    		int here = path.get(path.size() - 1);
+    		path.add(next);
+    		visited[next] = true;
+    		// 나머지 경로를 재귀 호출을 통해 완성하고 가장 짧은 경로의 길이를 얻는다.
+    		double cand = shortestPath(path, visited, currentLength + dist[here][next]);
+    		ret = Math.min(ret, cand);
+    		visited[next] = false;
+    		path.remove(path.size() - 1);
+
+    	}
+    	return ret;
+
+    }
+    ```
+
+    ​
