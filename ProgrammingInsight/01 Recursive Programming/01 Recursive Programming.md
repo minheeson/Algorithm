@@ -14,7 +14,7 @@
   	return ret;
   }
   ```
-  - factorial(1000000) 의 결과 : 0
+-   factorial(1000000) 의 결과 : 0
     - 1000000!는 int 형의 범위를 훨씬 넘기 때문
 
 - 재귀 호출을 이용
@@ -163,4 +163,47 @@
   ​
 
 
+#### 1.7 그레이 코드
+
+- **그레이 코드** : 연속된 수를 한 비트만 다르게 인코딩하는 방법 
+
+  - 연속적으로 변하는 양을 나타낼 때, 변화폭이 작아 오류를 줄일 수 있어 데이터 전송에서 많이 쓰임 
+  - *n* 비트 그레이 코드를 이용하여 *n+1* 비트 그레이 코드를 만들 수 있음
+    - n비트 그레이 코드를 적고 앞에 0을 붙인 것과, n비트 그레이 코드를 역순으로 적고 앞에 1을 붙인 것을 이으면 n+1비트 그레이 코드가 됨   
+    - 예) 00 10 11 10 | 10 11 10 00  >> 000 001 010 011 010 | 110 111 110 100 
+
+- 그레이 코드 출력
+
+  > n을 입력 받아서 n비트 그레이 코드를 출력하는 프로그램을 작성하라. 재귀 호출을 사용하여 간단명료 하게 작성
+
+- 재귀 호출을 이용
+
+  ```java
+  static void print_gray(int[] code, int n, int index) {
+  	if (index == n) {
+  		print_code(code, n);
+  		return;
+  	}
+
+  	code[index] = 0;
+  	print_gray(code, n, index + 1);
+  	code[index] = 1;
+  	print_gray_reverse(code, n, index + 1);
+
+  }
+
+  static void print_gray_reverse(int[] code, int n, int index) {
+  	if (index == n) {
+  		print_code(code, n);
+  		return;
+  	}
+
+  	code[index] = 1;
+  	print_gray(code, n, index + 1);
+  	code[index] = 0;
+  	print_gray_reverse(code, n, index + 1);
+  }
+  ```
+
+  ​
 
